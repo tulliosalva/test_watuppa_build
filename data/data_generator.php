@@ -49,8 +49,8 @@ for($i = 1; $i <= $numOrdini; $i ++) {
     $data['orders'][] = [rand($numUsers, 1), rand($numProducts, 1), date('Y-m-d', $dueMesiFa + rand($timeRangeDueMesi, 1))];
 }
 
-function createTable ($name, $data) {
-    global $db;
+function createTable ($db, $name, $data) {
+
     $db->rawQuery("DROP TABLE IF EXISTS $name");
     $q = "CREATE TABLE $name (id INT(9) UNSIGNED PRIMARY KEY AUTO_INCREMENT";
     foreach ($data as $k => $v) {
@@ -60,8 +60,8 @@ function createTable ($name, $data) {
     $db->rawQuery($q);
 }
 
-function insertValues($table, $fields, $dataArray) {
-    global $db;
+function insertValues($db, $table, $fields, $dataArray) {
+
     $fieldsStr = implode(',', array_keys($fields));
     $q = "INSERT INTO $table ($fieldsStr) VALUES ";
     //uso il formato json dell'array per creare rapidamente ilformato di inserimento INSERT ... VALUES ...
@@ -70,6 +70,6 @@ function insertValues($table, $fields, $dataArray) {
     $db->rawQuery($q);
 }
 foreach ($tables as $name => $fields) {
-    createTable ($prefix.$name, $fields);
-    insertValues ($prefix.$name, $fields, $data[$name]);
+    createTable ($db, $prefix.$name, $fields);
+    insertValues ($db, $prefix.$name, $fields, $data[$name]);
 }
