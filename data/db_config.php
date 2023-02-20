@@ -1,7 +1,7 @@
 <?php
 return [
-    'host' => 'localhost',
-    'username' => 'tullio',
-    'password' => 'vipassana_V1',
-    'db' => 'test1'
+    'host' => '',
+    'username' => '',
+    'password' => '',
+    'db' => ''
 ];
