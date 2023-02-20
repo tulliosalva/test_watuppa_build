@@ -12,6 +12,8 @@ class Util {
         //controllo se sono già state create te tabelle necessarie
         if(empty($this->dbConn->rawQuery("SHOW TABLES LIKE '{$this->prefix}users'"))) {
             //se non lo sono, le genero
+            $db = $this->dbConn;
+            $prefix = $this->prefix;
             include __DIR__."/data_generator.php";
         }
     }
